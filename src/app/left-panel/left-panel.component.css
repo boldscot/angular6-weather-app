@@ -1,0 +1,82 @@
+.left-panel-container {
+    width: 95%;
+    height: 95%;
+    text-align: center;
+    background-color: rgb(247, 177, 72);
+    opacity: 0.85;
+    color: white;
+    margin-left: 3%;
+    padding: 0%;
+    font-family: 'Baloo Bhai', cursive;
+}
+
+h2 {
+    margin: 0;
+    padding-top: 3%;
+    font-size: 200%;
+    background-color: rgb(255, 156, 7);
+}
+
+#your-local-message {
+    font-size: 150%;
+}
+
+#location {
+    font-size: 200%;
+}
+
+#rec {
+    background-color: rgb(115, 114, 114);
+    height: 2px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 700%;
+}
+
+#C {
+    color: rgb(179, 62, 7);
+}
+
+.icon {
+    width:25%;
+    height: auto;
+}
+
+#description {
+    font-size: 150%;
+    padding-bottom: 2%;
+}
+
+.three-days {
+    padding-bottom: 1%;
+    padding-top: 1.5%;
+    background-color: rgb(255, 156, 7);
+}
+
+.three-days-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.list-ele {
+    width: 33.0%;
+}
+
+.day-icon {
+    width: 30%;
+    height: auto;
+}
+
+.day-name {
+    color: rgb(179, 62, 7);
+    font-size: 120%;
+}

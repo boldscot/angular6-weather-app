@@ -1,0 +1,28 @@
+#middle-panel-container {
+    width: 100%;
+    height: 45%;
+    background-color: rgb(253, 249, 220);
+    text-align: center;
+    opacity: .7;
+    font-family: 'Baloo Bhai', cursive;
+}
+
+h1 {
+    margin: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.hour-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.hour-list-ele {
+    width: 25%;
+    padding: 0;
+    margin: 0;
+}

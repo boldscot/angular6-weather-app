@@ -1,0 +1,34 @@
+.the-days {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.one-day {
+    width: 20%;
+    list-style: none;
+    border: solid 2px  rgb(212, 212, 212);
+}
+
+.today-all {
+    border: solid 1px rgb(212, 212, 212);
+    text-align: center;
+    width: 300px;
+}
+
+.hour-list, .hour-list-ele {
+    list-style: none;
+    padding: 0;
+}
+
+
+.rectangle {
+    width: 200px;
+    height: 2px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    background-color: rgb(212, 212, 212); 
+}

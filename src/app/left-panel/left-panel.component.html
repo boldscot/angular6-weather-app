@@ -1,0 +1,21 @@
+<div class="left-panel-container">
+  <h2>LOCAL WEATHER REPORT</h2>
+  <div id="your-local-message"> Your Local Weather </div>
+  <div id="location"> Waterford City, Ireland</div>
+  <div id="rec"></div>
+  <div class="weather">
+    <h1>{{this.temp}}<sup>o</sup><span id="C">C</span></h1>
+    <img class="icon" src={{this.iconUrl}} alt="alt">
+    <div id="description"> {{this.description}} </div>
+  </div>
+  <div class="three-days">
+    <ul class="three-days-list">
+      <li class="list-ele" *ngFor="let day of nextThreeDays">
+          <img class="day-icon" src={{day.iconUrl}} alt="alt">
+          <div class="day-name">{{day.dayName}}</div>
+          <div class="low-temp">{{day.lowTemp}}<sup>o</sup>C</div>
+          <div class="high-temp">{{day.highTemp}}<sup>o</sup>C</div>
+      </li>
+    </ul>
+  </div>
+</div>

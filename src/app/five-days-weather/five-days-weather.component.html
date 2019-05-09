@@ -1,0 +1,31 @@
+<div class="the-days">
+  <li class="one-day" *ngFor="let day of days">
+    <h1>{{day.dayName}}</h1>
+    <div>
+      <img class="icon" src={{day.iconUrl}} alt="alt">
+      <div class="description">{{day.description}}</div>
+      <div class="temps">
+        <span><strong>H:</strong>{{day.highTemp}}<sup>o</sup></span>
+        <span class="ltemp"><strong>L:</strong>{{day.lowTemp}}<sup>o</sup></span>
+      </div>
+      <div class="humidity">Humidity: {{day.humidity}}</div>
+    </div>
+    <div class="the-hours">
+        <ul class="hour-list">
+          <li class="hour-list-ele" *ngFor="let hour of day.hourlyData">
+              <div class="rectangle"></div>
+              <h3>{{hour.time}}</h3>
+              <div>
+                <img class="hicon" src={{hour.iconUrl}} alt="alt">
+                <div class="description">{{hour.description}}</div>
+                <div class="htemps">
+                  <span class="htemp"><strong>H:</strong>{{hour.highTemp}}<sup>o</sup></span>
+                  <span class="ltemp"><strong>L:</strong>{{hour.lowTemp}}<sup>o</sup></span>
+                </div>
+                <div class="humidity">Humidity: {{hour.humidity}}</div>
+              </div>
+          </li>
+        </ul>
+      </div>
+  </li>
+</div>

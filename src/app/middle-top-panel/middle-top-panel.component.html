@@ -1,0 +1,12 @@
+<div id="middle-panel-container">
+  <h1>3 Hour Updates</h1>
+  <ul class="hour-list">
+    <li class="hour-list-ele" *ngFor="let hour of hourlyData">
+      <div id="time">{{hour.time}}</div>
+      <img id="icon" src={{hour.iconUrl}} alt="alt">
+      <div id="description">{{hour.description}}</div>
+      <div id="htemp"><strong>H:</strong>{{hour.highTemp}}</div>
+      <div id="ltemp"><strong>L:</strong>{{hour.lowTemp}}</div>
+    </li>
+  </ul>
+</div>

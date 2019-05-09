@@ -1,0 +1,19 @@
+<div id="middle-panel-container">
+    <div class="header">
+        <h2 class="location">Location</h2>
+        <h2 class="weather">Weather</h2>
+    </div>
+    <div id="cities">
+        <ul id="city-list">
+            <li class="city-list-ele" *ngFor="let obj of weatherLocationData" 
+                (click)="onSelect(obj.name)"
+                [class.selected]="obj.name===selectedLocation">
+                
+                <div class="name">{{obj.name}}</div>
+                <div class="temp"><strong>Temp: </strong>{{obj.temp}}</div>
+                <div><img class="icon" src={{obj.iconUrl}} alt="alt"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+ 

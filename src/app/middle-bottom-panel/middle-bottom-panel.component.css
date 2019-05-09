@@ -1,0 +1,80 @@
+#middle-panel-container {
+    width: 100%;
+    height: 49%;
+    text-align: center;
+    opacity: .8;
+    font-family: 'Baloo Bhai', cursive;
+}
+
+h2 {
+    background-color: rgb(255, 156, 7);
+    color: white;
+    font-size: 200%;
+    text-align: left;
+    padding: 2%;
+    margin-top: 1%;
+    margin-bottom: 0;
+    padding-bottom: 2%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.location {
+    min-width: 55%;
+}
+
+.weather {
+    min-width: 37%;
+}
+
+#cities {
+    margin: 0;
+    padding:0;
+}
+
+#city-list {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin-top: 0;
+    color: white;
+}
+
+.city-list-ele {
+    display: flex;
+    flex-direction: row;
+    background-color:  rgb(255, 156, 7);
+    font-size: 114%;
+    padding-left: 3%;
+    cursor: pointer;
+}
+
+.city-list-ele:nth-child(odd) {
+    background-color: rgb(247, 177, 72);
+}
+
+.name {
+    min-width: 60%;
+}
+
+.icon {
+    display: block;
+    width: 50%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.temp {
+    float:right;
+}
+
+.selected, .city-list-ele:nth-child(odd).selected {
+    color: rgb(247, 177, 72);
+    background-color: white;
+}
+
