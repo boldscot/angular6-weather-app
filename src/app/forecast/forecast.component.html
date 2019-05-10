@@ -1,0 +1,17 @@
+<div id="forecast-container">
+  <div id="header">
+    <div id="link"> <a routerLink="/forecast">5 Day Forecast</a></div>
+    <h1>5 Day Forecast</h1>
+    <div id="link"> <a routerLink="/mtp">3 Hour Updates</a></div>
+  </div>
+  
+    <ul class="forecast-list">
+      <li class="forecast-list-ele" *ngFor="let day of forecast">
+        <div id="day-name">{{day.dayName}}</div>
+        <img id="icon" src={{day.iconUrl}} alt="alt">
+        <div id="description">{{day.description}}</div>
+        <div id="htemp"><strong>H:</strong>{{day.highTemp}}</div>
+        <div id="ltemp"><strong>L:</strong>{{day.lowTemp}}</div>
+      </li>
+    </ul>
+</div>

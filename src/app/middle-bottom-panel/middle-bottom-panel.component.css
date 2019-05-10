@@ -71,6 +71,7 @@ h2 {
 
 .temp {
     float:right;
+    min-width: 120px;
 }
 
 .selected, .city-list-ele:nth-child(odd).selected {

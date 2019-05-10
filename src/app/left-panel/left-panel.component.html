@@ -1,7 +1,7 @@
 <div class="left-panel-container">
   <h2>LOCAL WEATHER REPORT</h2>
-  <div id="your-local-message"> Your Local Weather </div>
-  <div id="location"> Waterford City, Ireland</div>
+  <div id="your-local-message"> The local {{this.selectedLocation | uppercase}} weather</div>
+  <div id="location"> {{this.selectedLocation | uppercase}}</div>
   <div id="rec"></div>
   <div class="weather">
     <h1>{{this.temp}}<sup>o</sup><span id="C">C</span></h1>

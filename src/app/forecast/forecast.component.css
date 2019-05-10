@@ -1,4 +1,4 @@
-#middle-panel-container {
+#forecast-container {
     width: 100%;
     height: 45%;
     background-color: rgb(250, 250, 250);
@@ -24,7 +24,7 @@ h1 {
     padding-bottom: 5%;
 }
 
-.hour-list {
+.forecast-list {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -32,7 +32,7 @@ h1 {
     flex-direction: row;
 }
 
-.hour-list-ele {
+.forecast-list-ele {
     width: 25%;
     padding: 0;
     margin: 0;

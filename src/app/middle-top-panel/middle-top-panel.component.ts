@@ -11,14 +11,31 @@ export class MiddleTopPanelComponent implements OnInit {
   weatherData$: Object;
   currentDayName: string;
   hourlyData: Hour[];
+  selectedLocation: string;
 
   constructor(private data: WeatherDataService) { 
     this.currentDayName = new Date().toLocaleDateString("ire", {weekday: 'long'});
     this.hourlyData = [];
+    this.selectedLocation = this.data.getSelectedCity();
   }
 
   ngOnInit() {
-    this.data.getWeatherData().subscribe(
+    this.apiCall();
+  }
+
+  ngDoCheck() {
+    if (this.data.getSelectedCity() !== this.selectedLocation) {
+      // set the selectedlocation to the new value
+      this.selectedLocation = this.data.getSelectedCity()
+      //clear the hourly data
+      this.hourlyData = [];
+      //make the api call
+      this.apiCall();
+    }
+  }
+
+  apiCall() {
+    this.data.getWeatherData(this.data.getCityID(this.selectedLocation, this.data.getCities())).subscribe(
       data => {this.weatherData$ = data}, err => console.error(err), () => {
         if(this.weatherData$ != null) {
           for(let hr of this.weatherData$.list) {

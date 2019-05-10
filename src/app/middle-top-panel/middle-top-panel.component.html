@@ -1,5 +1,9 @@
 <div id="middle-panel-container">
-  <h1>3 Hour Updates</h1>
+  <div id="header">
+      <div id="link"> <a routerLink="/forecast">5 Day Forecast</a></div>
+      <h1>3 Hour Updates</h1>
+      <div id="link"> <a routerLink="/mtp">3 Hour Updates</a></div>
+  </div>
   <ul class="hour-list">
     <li class="hour-list-ele" *ngFor="let hour of hourlyData">
       <div id="time">{{hour.time}}</div>

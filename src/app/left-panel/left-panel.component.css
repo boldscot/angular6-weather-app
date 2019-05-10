@@ -55,6 +55,7 @@ h1 {
 .three-days {
     padding-bottom: 1%;
     padding-top: 1.5%;
+    min-height: 148px;
     background-color: rgb(255, 156, 7);
 }
 
