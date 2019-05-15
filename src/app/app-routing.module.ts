@@ -5,6 +5,7 @@ import { MiddleTopPanelComponent } from './middle-top-panel/middle-top-panel.com
 import { ForecastComponent } from './forecast/forecast.component';
 
 const routes: Routes= [
+  { path: '', redirectTo: '/mtp', pathMatch: 'full' },
   { path: 'mtp', component: MiddleTopPanelComponent }, 
   { path: 'forecast', component: ForecastComponent }
 ];

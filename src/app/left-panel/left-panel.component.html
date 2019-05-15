@@ -10,7 +10,7 @@
   </div>
   <div class="three-days">
     <ul class="three-days-list">
-      <li class="list-ele" *ngFor="let day of nextThreeDays">
+      <li class="list-ele" *ngFor="let day of threeDayForecast">
           <img class="day-icon" src={{day.iconUrl}} alt="alt">
           <div class="day-name">{{day.dayName}}</div>
           <div class="low-temp">{{day.lowTemp}}<sup>o</sup>C</div>

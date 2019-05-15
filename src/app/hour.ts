@@ -5,5 +5,4 @@ export class Hour {
     lowTemp: number;
     iconUrl: string;
     description: string;
-    humidity: string;
 }

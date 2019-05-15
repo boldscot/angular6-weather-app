@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { WeatherDataService } from '../weather-data.service';
 import { Day } from '../day';
+import { Hour } from '../hour';
 
 @Component({
   selector: 'app-left-panel',
@@ -13,11 +14,14 @@ export class LeftPanelComponent implements OnInit {
   temp: number;
   iconUrl: string;
   description: string;
-  nextThreeDays: Day[];
+  humidity: string;
+  nextThreeDays: Map<string, Hour[]>;
+  threeDayForecast: Day[];
   selectedLocation: string;
 
   constructor(private data: WeatherDataService) {
-    this.nextThreeDays = [];
+    this.nextThreeDays = new Map();
+    this.threeDayForecast = [];
     //get the current city name to display data for from the service 
     this.selectedLocation  = this.data.getSelectedCity();
   }
@@ -36,8 +40,9 @@ export class LeftPanelComponent implements OnInit {
     if (this.data.getSelectedCity() !== this.selectedLocation) {
       // set the selectedlocation to the new value
       this.selectedLocation = this.data.getSelectedCity();
-      // clear three day array
-      this.nextThreeDays =[];
+      // clear three day map
+      this.nextThreeDays.clear();
+      this.threeDayForecast = [];
       //mkae the api call
       this.apiCall(this.data.getCityID(this.selectedLocation, this.data.getCities()));
     }
@@ -51,6 +56,7 @@ export class LeftPanelComponent implements OnInit {
       () => {
         if (this.weatherData$ != null) {
           this.temp = this.weatherData$.main.temp;
+          this.humidity =  this.weatherData$.main.humidity;
           this.description = this.weatherData$.weather[0].description;
           this.iconUrl = `http://openweathermap.org/img/w/${this.weatherData$.weather[0].icon}.png`;
         }  
@@ -64,54 +70,65 @@ export class LeftPanelComponent implements OnInit {
     this.data.getWeatherData(id).subscribe(
       data => {this.weatherData$ = data}, err => console.error(err), () => {
         let today  = new Date().toLocaleDateString("ire", {weekday: 'long'});
-        let currentDayName = today;
-        let hTemp = 0.0;
-        let lTemp = 999.00;
-        let iUrl = '';
+        let day = today;
 
-        if(this.weatherData$ != null) {
-          // once there is data for three days stored, end the loop
-          for (let i = 0; i < this.weatherData$.list.length; i++) {
-            if(new Date(this.weatherData$.list[i].dt_txt).toLocaleDateString("ire",{weekday: 'long'}) === today) continue;
-            else {
-                // check if there are three entries in the nextThreeDays array
-                if(this.nextThreeDays.length < 3) {
-                let n = new Date(this.weatherData$.list[i].dt_txt).toLocaleDateString("ire",{weekday: 'long'});
-                // store the name of the day in n    
-                if(n === currentDayName) {
-                  // find the highest temp for the day
-                  if(this.weatherData$.list[i].main.temp_max > hTemp) hTemp = this.weatherData$.list[i].main.temp_max;
-                  // find the lowest temp for the day
-                  if(this.weatherData$.list[i].main.temp_min < lTemp) lTemp = this.weatherData$.list[i].main.temp_min;
-                  // use the weather icon where the time is 12 pm
-                  if (iUrl === '') {
-                    if(this.weatherData$.list[i].dt_txt.substring(11) === '12:00:00') {
-                        iUrl = `http://openweathermap.org/img/w/${this.weatherData$.list[i].weather[0].icon}.png`;
-                    }
-                  }
-                  
-                } else {
-                  // push day object to array
-                  this.nextThreeDays.push({
-                    dayName: n,
-                    highTemp: hTemp,
-                    lowTemp: lTemp,
-                    iconUrl: iUrl,
-                    description: ""
-                  });
-                  // change n to new day name
-                  currentDayName = n;
-                  //reset properties
-                  hTemp = 0.0;
-                  lTemp = 999.00;
-                  iUrl = '';
-                }
-              } else 
-                break;
+        // Loop over the ap response and pull out the data for the next three days, store it in the map
+        // Using the day name to group hours together for that day
+        for(let i = 0; i < this.weatherData$.list.length; i++) {
+          let obj = this.weatherData$.list[i];
+          day = new Date(obj.dt_txt).toLocaleDateString("ire",{weekday: 'long'});
+
+          // We want data to represent the next three days excluding today,
+          // So continue to the next loop iteration if the day === today
+          if (day === today) continue;
+          // Check the size of the map, if we have enough data break the loop
+          else if (this.nextThreeDays.size < 4) {
+            // Entry found for the day, add to the array for that day
+            if(this.nextThreeDays.has(day)) {
+                this.nextThreeDays.get(day).push({
+                  dayName: day,
+                  time: obj.dt_txt.substring(11),
+                  highTemp: obj.main.temp_max,
+                  lowTemp: obj.main.temp_min,
+                  iconUrl: `http://openweathermap.org/img/w/${obj.weather[0].icon}.png`,
+                  description: ''
+                });
+              } else {
+                // No entry in the map so create one
+                this.nextThreeDays.set(day, new Array);
+              }
+            } else {
+              // The map size goes to 4, but the array 4th entry will be empty, so drop the entry
+              this.nextThreeDays.delete(day);
+              break;
             }
-              
-          }
         }
+
+        
+        this.nextThreeDays.forEach((value: Array<Hour>, key: string) => {
+          let high = 0.00;
+          let low = 999.00;
+          let icon = '';
+
+          value.forEach(hr => {
+            if (hr.highTemp > high) high = hr.highTemp;
+            if (hr.lowTemp < low) low = hr.lowTemp;
+            if (icon === '') {
+              if ( hr.time === '12:00:00' || hr.time === '15:00:00' 
+                || hr.time === '18:00:00' || hr.time === '21:00:00') {
+                  icon = hr.iconUrl;
+                }
+            }
+          });
+
+          this.threeDayForecast.push({
+            dayName: key,
+            highTemp: high,
+            lowTemp: low,
+            iconUrl: icon,
+            description: ''
+          });
+        });
       });
   }
 }

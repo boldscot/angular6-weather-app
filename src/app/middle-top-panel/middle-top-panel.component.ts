@@ -47,7 +47,6 @@ export class MiddleTopPanelComponent implements OnInit {
                   highTemp: hr.main.temp_max, 
                   lowTemp: hr.main.temp_min,
                   description: hr.weather[0].description,
-                  humidity: hr.main.humidity,
                   iconUrl: `http://openweathermap.org/img/w/${hr.weather[0].icon}.png`
                 });
               } else {
